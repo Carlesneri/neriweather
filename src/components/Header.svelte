@@ -2,6 +2,4 @@
 </header>
 
 <style>
-  header {
-  }
 </style>
