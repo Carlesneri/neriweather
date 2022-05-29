@@ -2,11 +2,15 @@ const options = {
   method: 'GET',
   headers: {
     'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com',
-    'X-RapidAPI-Key': '095a78fa84msh15e0f49245cb2e9p1824b4jsnbd8bbd9b4650'
+    'X-RapidAPI-Key': import.meta.env.VITE_RAPIDAPI_KEY || ''
   }
 }
 
 export async function getCity({lat, lon}: {lat: number, lon: number}) {  
+  if(options.headers['X-RapidAPI-Key'] === '') {
+    throw new Error('No key for getCity')
+  }
+
   const latFormatted = lat >= 0 ? `%2B${lat}` : `${lat}`
   const lonFormatted = lon >= 0 ? `%2B${lon}` : `${lon}`
 

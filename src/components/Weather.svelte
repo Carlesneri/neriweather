@@ -4,7 +4,7 @@
   export let weather: IWeather
 </script>
 
-<div class="weather">
+<div>
   <h3>{weather.temp_c}ºC</h3>
   <h4>{weather.condition.text}</h4>
   <p>Feelslike temp: {weather.feelslike_c}ºC</p>
