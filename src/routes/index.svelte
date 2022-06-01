@@ -59,8 +59,6 @@
 		getWeather({ lat: selectedCity.coordinates.latitude, lon: selectedCity.coordinates.longitude })
 			.then((data: IWeather) => {
 				weather = data
-				console.log(data.condition.icon)
-
 				backgroundImage.set(data.condition.icon)
 			})
 			.catch(() => (error = 'No data found'))
@@ -90,8 +88,6 @@
 			getWeather({ lat, lon })
 				.then((data) => {
 					weather = data
-					console.log(data.condition.icon)
-
 					backgroundImage.set(data.condition.icon)
 				})
 				.catch((err) => (error = err))
