@@ -9,7 +9,8 @@
 	import { getCities } from '../services/getCities'
 	import { getCookie } from '../hooks/cookies'
 	import { browser } from '$app/env'
-	import Footer from '../components/Footer.svelte';
+	import Footer from '../components/Footer.svelte'
+	import { writable } from 'svelte/store'
 
 	let city: { name: string; country: string } | null = null
 
@@ -21,160 +22,19 @@
 
 	let weather: IWeather | null = null
 
+	let backgroundImage = writable<null | string>(null)
+
 	let error: string | null = null
 
 	const handleChangeCityInput = (event: Event) => {
 		const selectedCity = (event.target as HTMLInputElement).value
 
 		if (selectedCity.trim().length > 2) {
-			getCities(selectedCity)
-			.then((result) => {
+			getCities(selectedCity).then((result) => {
 				cities = result || []
 			})
-			// cities = [
-			// 	{
-			// 		id: '1205733',
-			// 		geonameId: 1205733,
-			// 		type: 'CITY',
-			// 		name: 'Chittagong',
-			// 		population: 3920222,
-			// 		elevation: 15,
-			// 		timezoneId: 'Asia/Dhaka',
-			// 		country: {
-			// 			id: 'BD',
-			// 			geonameId: 1210997,
-			// 			name: 'Bangladesh'
-			// 		},
-			// 		adminDivision1: {
-			// 			id: 'BD.84',
-			// 			geonameId: 1337200,
-			// 			name: 'Chittagong'
-			// 		},
-			// 		adminDivision2: {
-			// 			id: 'BD.84.2015',
-			// 			geonameId: 1337199,
-			// 			name: 'Chittagong District'
-			// 		},
-			// 		score: 13.593311,
-			// 		coordinates: {
-			// 			latitude: 22.3384,
-			// 			longitude: 91.8317
-			// 		}
-			// 	},
-			// 	{
-			// 		id: '1863967',
-			// 		geonameId: 1863967,
-			// 		type: 'CITY',
-			// 		name: 'Fukuoka',
-			// 		population: 1392289,
-			// 		elevation: 3,
-			// 		timezoneId: 'Asia/Tokyo',
-			// 		country: {
-			// 			id: 'JP',
-			// 			geonameId: 1861060,
-			// 			name: 'Japan'
-			// 		},
-			// 		adminDivision1: {
-			// 			id: 'JP.07',
-			// 			geonameId: 1863958,
-			// 			name: 'Fukuoka'
-			// 		},
-			// 		adminDivision2: {
-			// 			id: 'JP.07.1863955',
-			// 			geonameId: 1863955,
-			// 			name: 'Fukuoka City'
-			// 		},
-			// 		score: 12.14373,
-			// 		coordinates: {
-			// 			latitude: 33.6,
-			// 			longitude: 130.417
-			// 		}
-			// 	},
-			// 	{
-			// 		id: '1851717',
-			// 		geonameId: 1851717,
-			// 		type: 'CITY',
-			// 		name: 'Shizuoka',
-			// 		population: 701561,
-			// 		elevation: 23,
-			// 		timezoneId: 'Asia/Tokyo',
-			// 		country: {
-			// 			id: 'JP',
-			// 			geonameId: 1861060,
-			// 			name: 'Japan'
-			// 		},
-			// 		adminDivision1: {
-			// 			id: 'JP.37',
-			// 			geonameId: 1851715,
-			// 			name: 'Shizuoka'
-			// 		},
-			// 		adminDivision2: {
-			// 			id: 'JP.37.1851714',
-			// 			geonameId: 1851714,
-			// 			name: 'Shizuoka-shi'
-			// 		},
-			// 		score: 11.8460655,
-			// 		coordinates: {
-			// 			latitude: 34.9833,
-			// 			longitude: 138.383
-			// 		}
-			// 	},
-			// 	{
-			// 		id: '1819729',
-			// 		geonameId: 1819729,
-			// 		type: 'CITY',
-			// 		name: 'Hong Kong',
-			// 		population: 7012738,
-			// 		elevation: 60,
-			// 		timezoneId: 'Asia/Hong_Kong',
-			// 		country: {
-			// 			id: 'HK',
-			// 			geonameId: 1819730,
-			// 			name: 'Hong Kong'
-			// 		},
-			// 		adminDivision1: {
-			// 			id: 'HK.HCW',
-			// 			geonameId: 7533598,
-			// 			name: 'Central and Western District'
-			// 		},
-			// 		score: 11.845888,
-			// 		coordinates: {
-			// 			latitude: 22.2783,
-			// 			longitude: 114.175
-			// 		}
-			// 	},
-			// 	{
-			// 		id: '1854383',
-			// 		geonameId: 1854383,
-			// 		type: 'CITY',
-			// 		name: 'Okayama',
-			// 		population: 639652,
-			// 		elevation: 5,
-			// 		timezoneId: 'Asia/Tokyo',
-			// 		country: {
-			// 			id: 'JP',
-			// 			geonameId: 1861060,
-			// 			name: 'Japan'
-			// 		},
-			// 		adminDivision1: {
-			// 			id: 'JP.31',
-			// 			geonameId: 1854381,
-			// 			name: 'Okayama'
-			// 		},
-			// 		adminDivision2: {
-			// 			id: 'JP.31.1854380',
-			// 			geonameId: 1854380,
-			// 			name: 'Okayama Shi'
-			// 		},
-			// 		score: 11.805944,
-			// 		coordinates: {
-			// 			latitude: 34.65,
-			// 			longitude: 133.933
-			// 		}
-			// 	}
-			// ]
-		} 
-		
+		}
+
 		const datalistEl = document.querySelector('datalist')
 		if (datalistEl) {
 			datalistEl.style.display = cities.length > 0 ? 'block' : 'none'
@@ -197,31 +57,44 @@
 		cityInput.value = `${selectedCity.name}`
 
 		getWeather({ lat: selectedCity.coordinates.latitude, lon: selectedCity.coordinates.longitude })
-			.then((data) => {
+			.then((data: IWeather) => {
 				weather = data
+				console.log(data.condition.icon)
+
+				backgroundImage.set(data.condition.icon)
 			})
 			.catch(() => (error = 'No data found'))
 	}
 
 	if (browser) {
+		backgroundImage.subscribe((value) => {
+			const wrapper:HTMLInputElement | null = document.querySelector('.background-wrapper')
+			value && wrapper && (wrapper.style.backgroundImage = `url(${value})`)
+		})
+
 		navigator.geolocation.getCurrentPosition((position) => {
 			const lat = position.coords.latitude
 			const lon = position.coords.longitude
 
 			getCity({ lat, lon })
-			.then((data) => {
-				if (data[0]) {
-					city = {
-						name: data[0].name,
-						country: data[0].country
+				.then((data) => {
+					if (data[0]) {
+						city = {
+							name: data[0].name,
+							country: data[0].country
+						}
 					}
-				}
-			})
-			.catch((err) => (error = err))
+				})
+				.catch((err) => (error = err))
 
 			getWeather({ lat, lon })
-			.then((data) => (weather = data))
-			.catch((err) => (error = err))
+				.then((data) => {
+					weather = data
+					console.log(data.condition.icon)
+
+					backgroundImage.set(data.condition.icon)
+				})
+				.catch((err) => (error = err))
 		})
 
 		document.body.addEventListener('click', (event: Event) => {
@@ -242,6 +115,7 @@
 </script>
 
 <Header />
+<div class="background-wrapper" />
 <main>
 	<form>
 		<input
@@ -253,16 +127,8 @@
 		/>
 
 		<datalist class="cities">
-			<CitiesList
-			list={savedCities}
-			onClickCity={handleClickCity}
-			pinned={true}
-			/>
-			<CitiesList
-			list={cities}
-			onClickCity={handleClickCity}
-			pinned={false}
-			/>
+			<CitiesList list={savedCities} onClickCity={handleClickCity} pinned={true} />
+			<CitiesList list={cities} onClickCity={handleClickCity} pinned={false} />
 		</datalist>
 	</form>
 
@@ -303,6 +169,19 @@
 		min-height: 100vh;
 	}
 
+	.background-wrapper {
+		position: absolute;
+		top: 0;
+		width: 100vw;
+		height: 100vh;
+		opacity: .1;
+		transform: scale(2);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+		filter: blur(22px);
+	}
+
 	main {
 		margin: 0 auto;
 		width: fit-content;
@@ -340,13 +219,13 @@
 		position: absolute;
 		padding: 1rem;
 		text-align: center;
-		bottom: 0;
+		bottom: 2rem;
 		left: 0;
 	}
 
 	.errors p {
 		color: hsl(2, 100%, 55%);
 		font-weight: bold;
-		font-size: 0.9rem;
+		font-size: 0.8rem;
 	}
 </style>

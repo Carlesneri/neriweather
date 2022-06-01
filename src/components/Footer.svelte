@@ -16,5 +16,6 @@
     bottom: 1rem;
     left: 0;
     width: 100%;
+    max-width: 100vw;
   }
 </style>
