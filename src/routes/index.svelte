@@ -110,8 +110,6 @@
 	}
 </script>
 
-<Header />
-<div class="background-wrapper" />
 <main>
 	<form>
 		<input
@@ -145,6 +143,9 @@
 			<p>{error}</p>
 		</div>
 	{/if}
+
+	<div class="background-wrapper" />
+
 </main>
 
 <Footer />
@@ -155,6 +156,8 @@
 		font-size: 1rem;
 		box-sizing: border-box;
 		color: #b4adb3;
+		margin: 0;
+		padding: 0;
 	}
 
 	:global(body) {
@@ -162,29 +165,30 @@
 		background-color: #251723;
 		height: 100vh;
 		position: relative;
-		min-height: 100vh;
+		width: 100vw;
+	}
+
+	main {
+		margin: 1rem auto 0;
+		width: 100%;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.background-wrapper {
 		position: absolute;
-		top: 0;
-		width: 100vw;
+		width: 100%;
 		height: 100vh;
 		opacity: .1;
-		transform: scale(2);
 		background-repeat: no-repeat;
-		background-position: center;
-		background-size: cover;
-		filter: blur(22px);
-	}
-
-	main {
-		margin: 0 auto;
-		width: fit-content;
-	}
-
-	form {
-		position: relative;
+		background-position: top center;
+		background-size: contain;
+		filter: blur(7px);
+		transform: scale(1.2);
+		top: 2rem;
+		pointer-events: none;
 	}
 
 	input {
@@ -195,6 +199,11 @@
 		outline: none;
 		font-size: 1.3rem;
 		background-color: #2b1e29;
+	}
+
+	h2 {
+		margin: 2rem 0;
+		font-size: 1.6rem;
 	}
 
 	datalist {

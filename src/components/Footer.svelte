@@ -11,11 +11,9 @@
     color: #f45853;
     text-align: center;
     font-size: .6rem;
-    position: fixed;
-    margin: 0 auto;
+    position: absolute;
     bottom: 1rem;
-    left: 0;
     width: 100%;
-    max-width: 100vw;
+    text-align: center;
   }
 </style>
